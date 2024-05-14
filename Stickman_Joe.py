@@ -2,11 +2,11 @@ import pygame
 import sys
 import random
 
-
 class Button:
-    def __init__(self, surface, color, x, y, width, height, text=''):
+    def __init__(self, surface, image_path, x, y, width, height, text=''):
         self.surface = surface
-        self.color = color
+        self.image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(self.image, (width, height))
         self.x = x
         self.y = y
         self.width = width
@@ -14,23 +14,22 @@ class Button:
         self.text = text
         self.active = True
 
-    def draw(self, outline=None):
-        if outline:
-            pygame.draw.rect(self.surface, outline, (self.x - 2, self.y - 2, self.width + 4, self.height + 4), 0)
-        pygame.draw.rect(self.surface, self.color if self.active else (100, 100, 100),
-                         (self.x, self.y, self.width, self.height), 0)
-        if self.text != '':
-            font = pygame.font.SysFont(None, 30)
-            text_surface = font.render(self.text, True, (255, 255, 255))
-            text_rect = text_surface.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.surface.blit(text_surface, text_rect)
+    def draw(self):
+        if self.active:
+            self.surface.blit(self.image, (self.x, self.y))
+            if self.text != '':
+                font = pygame.font.SysFont(None, 30)
+                text_surface = font.render(self.text, True, (0, 0, 0))
+                text_rect = text_surface.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+                self.surface.blit(text_surface, text_rect)
 
     def is_over(self, pos):
         if self.active:
             if self.x < pos[0] < self.x + self.width and self.y < pos[1] < self.y + self.height:
                 return True
         return False
-
+    def set_inactive(self):
+        self.active = False
 
 class Key:
     def __init__(self, surface, image_path, x, y):
@@ -115,9 +114,10 @@ class SkærmTæller:
         self.nuvaerende_skaerm = 0
         self.skaerm_stack = []
 
-        self.start_button = Button(self.skaerm, (0, 0, 0), 400, 275, 200, 50, "Start")
-        self.left_button = Button(self.skaerm, (0, 0, 0), 50, 200, 50, 200, "Venstre")
-        self.right_button = Button(self.skaerm, (0, 0, 0), 700, 200, 50, 200, "Højre")
+        self.start_button = Button(self.skaerm, "start_knap.png", 400, 275, 200, 50, "Start")
+
+        self.left_button = Button(self.skaerm, "Venstre_knap.png", 50, self.skaerm_hoejde/2-100, 50, 200)
+        self.right_button = Button(self.skaerm, "Hjre_pil.png", 1200, self.skaerm_hoejde/2-100, 50, 200)
 
         self.key1 = Key(self.skaerm, "KEy_2.png", 100, 100)
         self.key2 = Key(self.skaerm, "KEy_1.png", 600, 100)
@@ -127,51 +127,51 @@ class SkærmTæller:
         self.key2_clicked = False
         self.key3_clicked = False
 
-        self.screen_4_button = Button(self.skaerm, (255, 0, 255), 255, 440, 50, 35, "Æg")
-        self.screen_5_button = Button(self.skaerm, (255, 0, 255), 250, 350, 75, 40, "Æble")
-        self.screen_6_button = Button(self.skaerm, (255, 0, 255), 250, 280, 75, 49, "Mælk")
-        self.screen_9_button = Button(self.skaerm, (255, 0, 255), 250, 390, 90, 40, "Banan")
-        self.screen_10_button = Button(self.skaerm, (255, 0, 255), 250, 480, 75, 40, "Sten")
-        self.screen_11_button = Button(self.skaerm, (255, 0, 255), 250, 525, 75, 40, "Gren")
-        self.screen_12_button = Button(self.skaerm, (255, 0, 255), 250, 310, 75, 40, "Stol")
-        self.screen_13_button = Button(self.skaerm, (255, 0, 255), 250, 570, 115, 40, "Cement")
+        self.screen_4_button = Button(self.skaerm, "Hjre_pil.png", 255, 440, 50, 35, "Æg")
+        self.screen_5_button = Button(self.skaerm, "Hjre_pil.png", 250, 350, 75, 40, "Æble")
+        self.screen_6_button = Button(self.skaerm, "Hjre_pil.png", 250, 280, 75, 49, "Mælk")
+        self.screen_9_button = Button(self.skaerm, "Hjre_pil.png", 250, 390, 90, 40, "Banan")
+        self.screen_10_button = Button(self.skaerm, "Hjre_pil.png", 250, 480, 75, 40, "Sten")
+        self.screen_11_button = Button(self.skaerm, "Hjre_pil.png", 250, 525, 75, 40, "Gren")
+        self.screen_12_button = Button(self.skaerm, "Hjre_pil.png", 250, 310, 75, 40, "Stol")
+        self.screen_13_button = Button(self.skaerm, "Hjre_pil.png", 250, 570, 115, 40, "Cement")
 
         self.buttons_clicked = {self.screen_4_button: False,
                                 self.screen_5_button: False,
                                 self.screen_6_button: False,
                                 self.screen_9_button: False}
 
-        self.screen_14_button = Button(self.skaerm, (99, 174, 255), 1050, 100, 50, 50, "Bold")
-        self.screen_15_button = Button(self.skaerm, (99, 174, 255), 550, 150, 50, 50, "Hold")
-        self.screen_16_button = Button(self.skaerm, (99, 174, 255), 820, 400, 50, 50, "Hop")
-        self.screen_17_button = Button(self.skaerm, (99, 174, 255), 450, 300, 50, 50, "Op")
-        self.screen_18_button = Button(self.skaerm, (99, 174, 255), 1050, 500, 50, 50, "Skål")
-        self.screen_19_button = Button(self.skaerm, (99, 174, 255), 450, 100, 50, 50, "Mål")
-        self.screen_20_button = Button(self.skaerm, (99, 174, 255), 820, 500, 50, 50, "Trommer")
-        self.screen_21_button = Button(self.skaerm, (99, 174, 255), 550, 250, 50, 50, "Sommer")
-        self.screen_22_button = Button(self.skaerm, (99, 174, 255), 1050, 300, 50, 50, "Kat")
-        self.screen_23_button = Button(self.skaerm, (99, 174, 255), 450, 200, 50, 50, "At")
-        self.screen_24_button = Button(self.skaerm, (99, 174, 255), 820, 100, 50, 50, "Granit")
-        self.screen_25_button = Button(self.skaerm, (99, 174, 255), 1050, 200, 50, 50, "Kamel")
-        self.screen_26_button = Button(self.skaerm, (99, 174, 255), 820, 300, 50, 50, "Fedt")
-        self.screen_27_button = Button(self.skaerm, (99, 174, 255), 1050, 400, 50, 50, "Kanin")
-        self.screen_28_button = Button(self.skaerm, (99, 174, 255), 820, 200, 50, 50, "Måne")
+        self.screen_14_button = Button(self.skaerm, "box_til_ord.png", 1000, 400, 50, 50, "Bold")
+        self.screen_15_button = Button(self.skaerm, "box_til_ord.png", 450, 400, 50, 50, "Hold")
+        self.screen_16_button = Button(self.skaerm, "box_til_ord.png", 820, 400, 50, 50, "Hop")
+        self.screen_17_button = Button(self.skaerm, "box_til_ord.png", 450, 265, 50, 50, "Op")
+        self.screen_18_button = Button(self.skaerm, "box_til_ord.png", 920, 475, 50, 50, "Skål")
+        self.screen_19_button = Button(self.skaerm, "box_til_ord.png", 450, 320, 50, 50, "Mål")
+        self.screen_20_button = Button(self.skaerm, "box_til_ord.png", 820, 475, 50, 50, "Trommer")
+        self.screen_21_button = Button(self.skaerm, "box_til_ord.png", 450, 475, 50, 50, "Sommer")
+        self.screen_22_button = Button(self.skaerm, "box_til_ord.png", 920, 300, 50, 50, "Kat")
+        self.screen_23_button = Button(self.skaerm, "box_til_ord.png", 450, 190, 50, 50, "At")
+        self.screen_24_button = Button(self.skaerm, "box_til_ord.png", 1000, 200, 50, 50, "Granit")
+        self.screen_25_button = Button(self.skaerm, "box_til_ord.png", 920, 200, 50, 50, "Kamel")
+        self.screen_26_button = Button(self.skaerm, "box_til_ord.png", 820, 300, 50, 50, "Fedt")
+        self.screen_27_button = Button(self.skaerm, "box_til_ord.png", 920, 400, 50, 50, "Kanin")
+        self.screen_28_button = Button(self.skaerm, "box_til_ord.png", 820, 200, 50, 50, "Måne")
 
-        self.screen_29_button = Button(self.skaerm, (197, 197, 197), 1150, 200, 50, 50, "Fandt")
-        self.screen_30_button = Button(self.skaerm, (197, 197, 197), 200, 500, 50, 50, "Blandt")
-        self.screen_31_button = Button(self.skaerm, (197, 197, 197), 1000, 400, 50, 50, "Hund")
-        self.screen_32_button = Button(self.skaerm, (197, 197, 197), 200, 300, 50, 50, "Stund")
-        self.screen_33_button = Button(self.skaerm, (197, 197, 197), 1000, 300, 50, 50, "Stråle")
-        self.screen_34_button = Button(self.skaerm, (197, 197, 197), 200, 100, 50, 50, "Åle")
-        self.screen_35_button = Button(self.skaerm, (197, 197, 197), 1000, 500, 50, 50, "Ballade")
-        self.screen_36_button = Button(self.skaerm, (197, 197, 197), 200, 400, 50, 50, "Marmelade")
-        self.screen_37_button = Button(self.skaerm, (197, 197, 197), 1000, 100, 50, 50, "Hest")
-        self.screen_38_button = Button(self.skaerm, (197, 197, 197), 200, 200, 50, 50, "Bedst")
-        self.screen_39_button = Button(self.skaerm, (197, 197, 197), 1150, 300, 50, 50, "Østers")
-        self.screen_40_button = Button(self.skaerm, (197, 197, 197), 1150, 100, 50, 50, "Bavian")
-        self.screen_41_button = Button(self.skaerm, (197, 197, 197), 1150, 500, 50, 50, "Mand")
-        self.screen_42_button = Button(self.skaerm, (197, 197, 197), 1150, 400, 50, 50, "Joe")
-        self.screen_43_button = Button(self.skaerm, (197, 197, 197), 1000, 200, 50, 50, "Bord")
+        self.screen_29_button = Button(self.skaerm, "box_til_ord.png", 1150, 200, 50, 50, "Fandt")
+        self.screen_30_button = Button(self.skaerm, "box_til_ord.png", 200, 500, 50, 50, "Blandt")
+        self.screen_31_button = Button(self.skaerm, "box_til_ord.png", 1000, 400, 50, 50, "Hund")
+        self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 200, 300, 50, 50, "Stund")
+        self.screen_33_button = Button(self.skaerm, "box_til_ord.png", 1000, 300, 50, 50, "Stråle")
+        self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 200, 100, 50, 50, "Åle")
+        self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 1000, 500, 50, 50, "Ballade")
+        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 200, 400, 50, 50, "Marmelade")
+        self.screen_37_button = Button(self.skaerm, "box_til_ord.png", 1000, 100, 50, 50, "Hest")
+        self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 200, 200, 50, 50, "Bedst")
+        self.screen_39_button = Button(self.skaerm, "box_til_ord.png", 1150, 300, 50, 50, "Østers")
+        self.screen_40_button = Button(self.skaerm, "box_til_ord.png", 1150, 100, 50, 50, "Bavian")
+        self.screen_41_button = Button(self.skaerm, "box_til_ord.png", 1150, 500, 50, 50, "Mand")
+        self.screen_42_button = Button(self.skaerm, "box_til_ord.png", 1150, 400, 50, 50, "Joe")
+        self.screen_43_button = Button(self.skaerm, "box_til_ord.png", 1000, 200, 50, 50, "Bord")
 
         self.textbox = Textbox(800, 580)
         self.textbox1 = Textbox(370, 330)
@@ -295,22 +295,32 @@ class SkærmTæller:
                             print("Bold og hold")
                             self.message_printed = True
                             self.point_6 += 1
+                            self.screen_14_button.set_inactive()
+                            self.screen_15_button.set_inactive()
                         if self.button_16_clicked and self.button_17_clicked and not self.message2_printed:
                             print("Hop og op")
                             self.message2_printed = True
                             self.point_6 += 1
+                            self.screen_16_button.set_inactive()
+                            self.screen_17_button.set_inactive()
                         if self.button_18_clicked and self.button_19_clicked and not self.message3_printed:
                             print("Skål og mål")
                             self.message3_printed = True
                             self.point_6 += 1
+                            self.screen_18_button.set_inactive()
+                            self.screen_19_button.set_inactive()
                         if self.button_20_clicked and self.button_21_clicked and not self.message4_printed:
                             print("Trommer og sommer")
                             self.message4_printed = True
                             self.point_6 += 1
+                            self.screen_20_button.set_inactive()
+                            self.screen_21_button.set_inactive()
                         if self.button_22_clicked and self.button_23_clicked and not self.message5_printed:
                             print("Kat og at")
                             self.message5_printed = True
                             self.point_6 += 1
+                            self.screen_22_button.set_inactive()
+                            self.screen_23_button.set_inactive()
 
                     elif self.nuvaerende_skaerm == 9:
                         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -339,22 +349,33 @@ class SkærmTæller:
                             print("Fandt og blandt")
                             self.message6_printed = True
                             self.point_9 += 1
+                            self.screen_29_button.set_inactive()
+                            self.screen_30_button.set_inactive()
                         if self.button_31_clicked and self.button_32_clicked and not self.message7_printed:
                             print("Hund og stund")
                             self.message7_printed = True
                             self.point_9 += 1
+                            self.screen_31_button.set_inactive()
+                            self.screen_32_button.set_inactive()
                         if self.button_33_clicked and self.button_34_clicked and not self.message8_printed:
                             print("Stråle og åle")
                             self.message8_printed = True
                             self.point_9 += 1
+                            self.screen_33_button.set_inactive()
+                            self.screen_34_button.set_inactive()
                         if self.button_35_clicked and self.button_36_clicked and not self.message9_printed:
                             print("Ballade og marmelade")
                             self.message9_printed = True
                             self.point_9 += 1
+                            self.screen_35_button.set_inactive()
+                            self.screen_36_button.set_inactive()
                         if self.button_37_clicked and self.button_38_clicked and not self.message10_printed:
                             print("Hest og bedst")
                             self.message10_printed = True
                             self.point_9 += 1
+                            self.screen_37_button.set_inactive()
+                            self.screen_38_button.set_inactive()
+
             # Handle textbox inputs
             self.textbox.handle_event(event)
             self.textbox1.handle_event(event)
@@ -542,7 +563,7 @@ class SkærmTæller:
             self.right_button.draw()
 
         elif self.nuvaerende_skaerm == 6:
-            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_ny.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_med_box.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_14_button.draw()
