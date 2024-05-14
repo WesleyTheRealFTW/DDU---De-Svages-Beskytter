@@ -127,10 +127,6 @@ class SkærmTæller:
         self.left_button = Button(self.skaerm, "Venstre_knap.png", 50, self.skaerm_hoejde/2-100, 50, 200)
         self.right_button = Button(self.skaerm, "Hjre_pil.png", 1200, self.skaerm_hoejde/2-100, 50, 200)
 
-        self.start_button = Button(self.skaerm, (0, 0, 0), 400, 275, 200, 50, "Start")
-        self.left_button = Button(self.skaerm, (0, 0, 0), 50, self.skaerm_hoejde / 2 - 100, 50, 200, "Venstre")
-        self.right_button = Button(self.skaerm, (0, 0, 0), 1200, self.skaerm_hoejde / 2 - 100, 50, 200, "Højre")
-
 
         self.key1 = Key(self.skaerm, "KEy_2.png", 100, 100)
         self.key2 = Key(self.skaerm, "KEy_1.png", 600, 100)
