@@ -3,6 +3,7 @@ import sys
 import random
 
 
+
 class Button:
     def __init__(self, surface, color, x, y, width, height, text=''):
         self.surface = surface
@@ -95,7 +96,7 @@ class SkærmTæller:
         pygame.mixer.init()
         pygame.mixer.music.load("musik.mp3")
         pygame.mixer.music.play(-1)
-        self.sound = pygame.mixer.Sound("Hoe siger tak.mp3")
+        self.sound = pygame.mixer.Sound("Ny stickman joe mp3/Hoe siger tak.mp3")
         self.sound_1 = pygame.mixer.Sound("Ny stickman joe mp3/Joe stol.mp3")
         self.sound_2 = pygame.mixer.Sound("Ny stickman joe mp3/Joes cement.mp3")
         self.sound_3 = pygame.mixer.Sound("Ny stickman joe mp3/Joes gren.mp3")
@@ -105,6 +106,12 @@ class SkærmTæller:
         self.sound_7 = pygame.mixer.Sound("Ny stickman joe mp3/Joe æble.mp3")
         self.sound_8 = pygame.mixer.Sound("Ny stickman joe mp3/Joes banan.mp3")
         self.sound_9 = pygame.mixer.Sound("Ny stickman joe mp3/Joe forklarer tekstboks minigame.mp3")
+        self.sound_10 = pygame.mixer.Sound("Ny stickman joe mp3/Tryk på nøglen.mp3")
+        self.sound_11 = pygame.mixer.Sound("Ny stickman joe mp3/Tutorial højre knap.mp3")
+        self.sound_12 = pygame.mixer.Sound("Ny stickman joe mp3/Joe kan ikke finde sin nøgle.mp3")
+        self.sound_13 = pygame.mixer.Sound("Ny stickman joe mp3/Joe siger tak og skal finde sin indkøbsliste.mp3")
+        self.sound_14 = pygame.mixer.Sound("Ny stickman joe mp3/Indkøbsliste varer.mp3")
+        self.sound_15 = pygame.mixer.Sound("Ny stickman joe mp3/Tryk på ord på liste.mp3")
         self.sound_played = False
         self.skaerm_bredde = 1300
         self.skaerm_hoejde = 800
@@ -262,10 +269,16 @@ class SkærmTæller:
                     elif event.button == pygame.BUTTON_LEFT and self.key1.is_clicked(event.pos):
                         self.key1_clicked = True
                         print("The first key has been clicked")
+                        if self.sound_11:
+                            self.sound_11.play()
+                            self.sound_11 = False
 
                     elif event.button == pygame.BUTTON_LEFT and self.key2.is_clicked(event.pos):
                         self.key2_clicked = True
                         print("The second key has been clicked")
+                        if self.sound_13:
+                            self.sound_13.play()
+                            self.sound_13 = False
 
                     elif event.button == pygame.BUTTON_LEFT and self.key3.is_clicked(event.pos):
                         self.key3_clicked = True
@@ -427,6 +440,11 @@ class SkærmTæller:
                 self.skaerm.blit(background_img_3, (0, 0))
                 if not self.key1_clicked:
                     self.key1.draw_key()
+                if self.sound_10:
+                    self.sound_10.play()
+                    self.sound_10 = False
+
+
             elif self.nuvaerende_skaerm == 2:
                 self.skaerm.fill((255, 0, 0))
                 background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house.png")
@@ -434,6 +452,9 @@ class SkærmTæller:
                 self.skaerm.blit(background_img_2, (0, 0))
                 if not self.key2_clicked:
                     self.key2.draw_key()
+                if self.sound_12:
+                    self.sound_12.play()
+                    self.sound_12 = False
             elif self.nuvaerende_skaerm == 3:
                 self.skaerm.fill((0, 255, 0))
                 background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house.png")
@@ -478,6 +499,14 @@ class SkærmTæller:
             background_img_5 = pygame.image.load("Grafisk baggrund/Indkbsliste.png")
             background_img_5 = pygame.transform.scale(background_img_5, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_5, (0, 0))
+            if self.sound_14:
+                self.sound_14.play()
+                pygame.time.wait(int(self.sound_14.get_length() * 1000))
+                self.sound_14 = False
+
+            if self.sound_15 and not self.sound_14:
+                self.sound_15.play()
+                self.sound_15 = False
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
