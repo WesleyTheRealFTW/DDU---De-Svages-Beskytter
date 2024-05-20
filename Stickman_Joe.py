@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 
 
 class Button:
@@ -67,7 +66,7 @@ class Textbox:
                     self.active = not self.active
                 else:
                     self.active = False
-                self.color = (255, 0, 0) if self.active else (230, 0, 0)
+                self.color = (255, 0, 0) if self.active else (100, 150, 0)
 
             if event.type == pygame.KEYDOWN and self.active:
                 if event.key == pygame.K_RETURN:
@@ -122,7 +121,7 @@ class SkærmTæller:
         self.skaerm_stack = []
 
 
-        self.start_button = Button(self.skaerm, "start_knap.png", 400, 275, 200, 50, "Start")
+        self.start_button = Button(self.skaerm, "start_knap.png", 400, 275, 250, 250, "Start")
 
         self.left_button = Button(self.skaerm, "Venstre_knap.png", 50, self.skaerm_hoejde/2-100, 50, 200)
         self.right_button = Button(self.skaerm, "Hjre_pil.png", 1200, self.skaerm_hoejde/2-100, 50, 200)
@@ -156,8 +155,8 @@ class SkærmTæller:
         self.screen_17_button = Button(self.skaerm, "box_til_ord.png", 450, 265, 50, 50, "Op")
         self.screen_18_button = Button(self.skaerm, "box_til_ord.png", 920, 475, 50, 50, "Skål")
         self.screen_19_button = Button(self.skaerm, "box_til_ord.png", 450, 320, 50, 50, "Mål")
-        self.screen_20_button = Button(self.skaerm, "box_til_ord.png", 820, 475, 50, 50, "Trommer")
-        self.screen_21_button = Button(self.skaerm, "box_til_ord.png", 450, 475, 50, 50, "Sommer")
+        self.screen_20_button = Button(self.skaerm, "box_til_ord.png", 820, 475, 79, 50, "Trommer")
+        self.screen_21_button = Button(self.skaerm, "box_til_ord.png", 450, 475, 79, 50, "Sommer")
         self.screen_22_button = Button(self.skaerm, "box_til_ord.png", 920, 300, 50, 50, "Kat")
         self.screen_23_button = Button(self.skaerm, "box_til_ord.png", 450, 190, 50, 50, "At")
         self.screen_24_button = Button(self.skaerm, "box_til_ord.png", 1000, 200, 50, 50, "Granit")
@@ -172,15 +171,15 @@ class SkærmTæller:
         self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 220, 300, 50, 50, "Stund")
         self.screen_33_button = Button(self.skaerm, "box_til_ord.png", 1000, 300, 50, 50, "Stråle")
         self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 200, 100, 50, 50, "Åle")
-        self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 900, 200, 50, 50, "Ballade")
-        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 200, 400, 50, 50, "Marmelade")
+        self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 910, 200, 80, 50, "Ballade")
+        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 150, 400, 110, 50, "Marmelade")
         self.screen_37_button = Button(self.skaerm, "box_til_ord.png", 1000, 100, 50, 50, "Hest")
         self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 220, 200, 50, 50, "Bedst")
         self.screen_39_button = Button(self.skaerm, "box_til_ord.png", 1150, 300, 50, 50, "Østers")
         self.screen_40_button = Button(self.skaerm, "box_til_ord.png", 1150, 100, 50, 50, "Bavian")
         self.screen_41_button = Button(self.skaerm, "box_til_ord.png", 900, 300, 50, 50, "Mand")
         self.screen_42_button = Button(self.skaerm, "box_til_ord.png", 1150, 400, 50, 50, "Joe")
-        self.screen_43_button = Button(self.skaerm, "box_til_ord.png", 1000, 200, 50, 50, "Bord")
+        self.screen_43_button = Button(self.skaerm, "box_til_ord.png", 1060, 200, 50, 50, "Bord")
 
         self.textbox = Textbox(800, 580)
         self.textbox1 = Textbox(370, 330)
@@ -454,6 +453,7 @@ class SkærmTæller:
             self.skaerm.blit(background_img, (0, 0))
             self.start_button.active = True
             self.start_button.draw()
+
         elif self.nuvaerende_skaerm >= 1 and self.nuvaerende_skaerm < 4:
             if self.nuvaerende_skaerm == 1:
                 background_img_3 = pygame.image.load("Grafisk baggrund/Level_select.png")
@@ -476,6 +476,7 @@ class SkærmTæller:
                 if self.sound_12:
                     self.sound_12.play()
                     self.sound_12 = False
+
             elif self.nuvaerende_skaerm == 3:
                 self.skaerm.fill((0, 255, 0))
                 background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png")
@@ -483,9 +484,6 @@ class SkærmTæller:
                 self.skaerm.blit(background_img_4, (0, 0))
                 if not self.key3_clicked:
                     self.key3.draw_key()
-
-            skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
-            self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
 
             if self.nuvaerende_skaerm != 1:
                 self.left_button.active = True
@@ -504,6 +502,7 @@ class SkærmTæller:
             else:
                 self.right_button.active = False
 
+
         elif self.nuvaerende_skaerm == 4:
             self.skaerm.fill((0, 0, 255))
             self.left_button.color = (0, 0, 0)
@@ -519,11 +518,9 @@ class SkærmTæller:
             background_img_5 = pygame.image.load("Grafisk baggrund/Indkbsliste.png")
             background_img_5 = pygame.transform.scale(background_img_5, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_5, (0, 0))
-
             if self.sound_15:
                 self.sound_15.play()
                 self.sound_15 = False
-
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if self.screen_10_button.is_over(event.pos):
@@ -541,34 +538,38 @@ class SkærmTæller:
                     elif self.screen_4_button.is_over(event.pos):
                         print("Click Æg")
                         self.sound_5.play()
+                        self.buttons_clicked[self.screen_4_button] = True
                     elif self.screen_5_button.is_over(event.pos):
                         print("Click Æble")
                         self.sound_7.play()
+                        self.buttons_clicked[self.screen_5_button] = True
                     elif self.screen_6_button.is_over(event.pos):
                         print("Click Mælk")
                         self.sound_6.play()
+                        self.buttons_clicked[self.screen_6_button] = True
                     elif self.screen_9_button.is_over(event.pos):
                         print("Click Banan")
                         self.sound_8.play()
-
-                    if (self.nuvaerende_skaerm == 4 and
-                          (self.screen_4_button.is_over(event.pos) or
-                           self.screen_5_button.is_over(event.pos) or
-                           self.screen_6_button.is_over(event.pos) or
-                           self.screen_9_button.is_over(event.pos))):
-                        for button in self.buttons_clicked:
-                            if button.is_over(event.pos):
-                                self.buttons_clicked[button] = True
-                        if all(self.buttons_clicked.values()):
-                            print("All buttons on screen 4 have been clicked")
-                            self.right_button_active = True
-
+                        self.buttons_clicked[self.screen_9_button] = True
+                    # Check if all required buttons have been clicked
+                    if all(self.buttons_clicked.values()):
+                        print("All buttons on screen 4 have been clicked")
+                        self.right_button_active = True
+                    else:
+                        self.right_button_active = False
+                if self.right_button_active and event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.right_button.is_over(event.pos):
+                        self.nuvaerende_skaerm += 1
             if self.right_button_active:
                 self.right_button.active = True
                 self.right_button.color = (0, 0, 0)
-                self.right_button.draw()
             else:
                 self.right_button.active = False
+                self.right_button.color = (100, 100, 100)
+            self.right_button.draw()
+
+
+
         elif self.nuvaerende_skaerm == 5:
             self.skaerm.fill((255, 255, 0))
             skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
