@@ -469,7 +469,7 @@ class SkærmTæller:
 
             elif self.nuvaerende_skaerm == 2:
                 self.skaerm.fill((255, 0, 0))
-                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_hjem_uden_ngle.png")
+                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png.png")
                 background_img_2 = pygame.transform.scale(background_img_2, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_2, (0, 0))
                 if not self.key2_clicked:
@@ -479,7 +479,7 @@ class SkærmTæller:
                     self.sound_12 = False
             elif self.nuvaerende_skaerm == 3:
                 self.skaerm.fill((0, 255, 0))
-                background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_hjem_uden_ngle.png")
+                background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png")
                 background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_4, (0, 0))
                 if not self.key3_clicked:
