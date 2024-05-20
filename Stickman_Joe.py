@@ -469,7 +469,7 @@ class SkærmTæller:
 
             elif self.nuvaerende_skaerm == 2:
                 self.skaerm.fill((255, 0, 0))
-                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png.png")
+                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png")
                 background_img_2 = pygame.transform.scale(background_img_2, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_2, (0, 0))
                 if not self.key2_clicked:
@@ -577,7 +577,7 @@ class SkærmTæller:
             self.skaerm.fill((255, 255, 0))
             skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
             self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
-            background_img_4 = pygame.image.load("Grafisk baggrund/cykel_scene.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/cykel_scene_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.left_button.active = True
@@ -588,7 +588,7 @@ class SkærmTæller:
             self.right_button.draw()
 
         elif self.nuvaerende_skaerm == 6:
-            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_med_box.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_park_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_14_button.draw()
@@ -626,7 +626,7 @@ class SkærmTæller:
             self.skaerm.fill((0, 255, 255))
             skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
             self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Otten_front.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Otten_front_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.left_button.active = True
@@ -641,7 +641,7 @@ class SkærmTæller:
                 self.sound_9.play()
                 self.sound_9 = False
             self.skaerm.fill((0, 255, 255))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Inden_i_butikken_ny.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Inden_i_butikken_nye_figuer.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.textbox.draw(self.skaerm)
@@ -663,7 +663,7 @@ class SkærmTæller:
 
         elif self.nuvaerende_skaerm == 9:
             self.skaerm.fill((0, 255, 79))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen_rim_boks_rykket.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_29_button.draw()
