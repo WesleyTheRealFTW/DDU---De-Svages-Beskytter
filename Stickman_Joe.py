@@ -95,7 +95,7 @@ class SkærmTæller:
         pygame.mixer.init()
         pygame.mixer.music.load("musik.mp3")
         pygame.mixer.music.play(-1)
-        self.sound = pygame.mixer.Sound("Ny stickman joe mp3/Hoe siger tak.mp3")
+        self.sound = pygame.mixer.Sound("Ny stickman joe mp3/Goe siger tak.mp3")
         self.sound_1 = pygame.mixer.Sound("Ny stickman joe mp3/Joe stol.mp3")
         self.sound_2 = pygame.mixer.Sound("Ny stickman joe mp3/Joes cement.mp3")
         self.sound_3 = pygame.mixer.Sound("Ny stickman joe mp3/Joes gren.mp3")
@@ -167,18 +167,18 @@ class SkærmTæller:
         self.screen_28_button = Button(self.skaerm, "box_til_ord.png", 820, 200, 50, 50, "Måne")
 
         self.screen_29_button = Button(self.skaerm, "box_til_ord.png", 1150, 200, 50, 50, "Fandt")
-        self.screen_30_button = Button(self.skaerm, "box_til_ord.png", 300, 500, 50, 50, "Blandt")
+        self.screen_30_button = Button(self.skaerm, "box_til_ord.png", 140, 250, 50, 50, "Blandt")
         self.screen_31_button = Button(self.skaerm, "box_til_ord.png", 1000, 400, 50, 50, "Hund")
-        self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 300, 300, 50, 50, "Stund")
+        self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 220, 300, 50, 50, "Stund")
         self.screen_33_button = Button(self.skaerm, "box_til_ord.png", 1000, 300, 50, 50, "Stråle")
-        self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 300, 100, 50, 50, "Åle")
-        self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 1000, 500, 50, 50, "Ballade")
-        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 300, 400, 50, 50, "Marmelade")
+        self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 200, 100, 50, 50, "Åle")
+        self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 900, 200, 50, 50, "Ballade")
+        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 200, 400, 50, 50, "Marmelade")
         self.screen_37_button = Button(self.skaerm, "box_til_ord.png", 1000, 100, 50, 50, "Hest")
-        self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 300, 200, 50, 50, "Bedst")
+        self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 220, 200, 50, 50, "Bedst")
         self.screen_39_button = Button(self.skaerm, "box_til_ord.png", 1150, 300, 50, 50, "Østers")
         self.screen_40_button = Button(self.skaerm, "box_til_ord.png", 1150, 100, 50, 50, "Bavian")
-        self.screen_41_button = Button(self.skaerm, "box_til_ord.png", 1150, 500, 50, 50, "Mand")
+        self.screen_41_button = Button(self.skaerm, "box_til_ord.png", 900, 300, 50, 50, "Mand")
         self.screen_42_button = Button(self.skaerm, "box_til_ord.png", 1150, 400, 50, 50, "Joe")
         self.screen_43_button = Button(self.skaerm, "box_til_ord.png", 1000, 200, 50, 50, "Bord")
 
@@ -250,11 +250,9 @@ class SkærmTæller:
                         self.nuvaerende_skaerm += 1
                         self.skaerm_stack.append(self.nuvaerende_skaerm - 1)
                         if self.nuvaerende_skaerm == 2:
-                            self.skaerm.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
                             self.key1_clicked = False
 
                         elif self.nuvaerende_skaerm == 3:
-                            self.skaerm.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
                             self.key2_clicked = False
 
                         elif self.nuvaerende_skaerm == 4:
@@ -284,7 +282,9 @@ class SkærmTæller:
                     elif event.button == pygame.BUTTON_LEFT and self.key3.is_clicked(event.pos):
                         self.key3_clicked = True
                         print("The third key has been clicked")
-
+                        if self.sound_14:
+                            self.sound_14.play()
+                            self.sound_14 = False
 
 
                     elif self.nuvaerende_skaerm == 6:
@@ -468,7 +468,7 @@ class SkærmTæller:
 
             elif self.nuvaerende_skaerm == 2:
                 self.skaerm.fill((255, 0, 0))
-                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house.png")
+                background_img_2 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png")
                 background_img_2 = pygame.transform.scale(background_img_2, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_2, (0, 0))
                 if not self.key2_clicked:
@@ -478,7 +478,7 @@ class SkærmTæller:
                     self.sound_12 = False
             elif self.nuvaerende_skaerm == 3:
                 self.skaerm.fill((0, 255, 0))
-                background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house.png")
+                background_img_4 = pygame.image.load("Grafisk baggrund/inden_i_Joes_house_ny.png")
                 background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_4, (0, 0))
                 if not self.key3_clicked:
@@ -505,6 +505,9 @@ class SkærmTæller:
                 self.right_button.active = False
 
         elif self.nuvaerende_skaerm == 4:
+            self.skaerm.fill((0, 0, 255))
+            self.left_button.color = (0, 0, 0)
+            self.left_button.draw()
             self.screen_4_button.draw()
             self.screen_5_button.draw()
             self.screen_6_button.draw()
@@ -516,12 +519,8 @@ class SkærmTæller:
             background_img_5 = pygame.image.load("Grafisk baggrund/Indkbsliste.png")
             background_img_5 = pygame.transform.scale(background_img_5, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_5, (0, 0))
-            if self.sound_14:
-                self.sound_14.play()
-                pygame.time.wait(int(self.sound_14.get_length() * 1000))
-                self.sound_14 = False
 
-            if self.sound_15 and not self.sound_14:
+            if self.sound_15:
                 self.sound_15.play()
                 self.sound_15 = False
 
@@ -574,7 +573,7 @@ class SkærmTæller:
             self.skaerm.fill((255, 255, 0))
             skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
             self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
-            background_img_4 = pygame.image.load("Grafisk baggrund/cykel_scene.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/cykel_scene_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.left_button.active = True
@@ -585,7 +584,7 @@ class SkærmTæller:
             self.right_button.draw()
 
         elif self.nuvaerende_skaerm == 6:
-            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_med_box.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Park_rap_battle_park_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_14_button.draw()
@@ -623,7 +622,7 @@ class SkærmTæller:
             self.skaerm.fill((0, 255, 255))
             skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
             self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Otten_front.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Otten_front_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.left_button.active = True
@@ -634,9 +633,11 @@ class SkærmTæller:
             self.right_button.draw()
 
         elif self.nuvaerende_skaerm == 8:
-            self.sound_9.play()
+            if self.sound_9:
+                self.sound_9.play()
+                self.sound_9 = False
             self.skaerm.fill((0, 255, 255))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Inden_i_butikken_ny.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Inden_i_butikken_nye_figuer.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.textbox.draw(self.skaerm)
@@ -658,7 +659,7 @@ class SkærmTæller:
 
         elif self.nuvaerende_skaerm == 9:
             self.skaerm.fill((0, 255, 79))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen_ny.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen_rim_boks_rykket.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_29_button.draw()
@@ -689,13 +690,15 @@ class SkærmTæller:
                 self.right_button.active = True
                 self.right_button.color = (0, 0, 0)
                 self.right_button.draw()
-                self.sound.play()
-                self.sound_played = True
+                if self.sound:
+                    self.sound.play()
+                    self.sound = False
             else:
                 self.right_button.active = False
 
         if self.nuvaerende_skaerm == 10:
             self.skaerm.fill((0, 0, 0))
+            self.left_button.active = False
 
         pygame.display.flip()
 
