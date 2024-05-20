@@ -167,15 +167,15 @@ class SkærmTæller:
         self.screen_28_button = Button(self.skaerm, "box_til_ord.png", 820, 200, 50, 50, "Måne")
 
         self.screen_29_button = Button(self.skaerm, "box_til_ord.png", 1150, 200, 50, 50, "Fandt")
-        self.screen_30_button = Button(self.skaerm, "box_til_ord.png", 200, 500, 50, 50, "Blandt")
+        self.screen_30_button = Button(self.skaerm, "box_til_ord.png", 300, 500, 50, 50, "Blandt")
         self.screen_31_button = Button(self.skaerm, "box_til_ord.png", 1000, 400, 50, 50, "Hund")
-        self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 200, 300, 50, 50, "Stund")
+        self.screen_32_button = Button(self.skaerm, "box_til_ord.png", 300, 300, 50, 50, "Stund")
         self.screen_33_button = Button(self.skaerm, "box_til_ord.png", 1000, 300, 50, 50, "Stråle")
-        self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 200, 100, 50, 50, "Åle")
+        self.screen_34_button = Button(self.skaerm, "box_til_ord.png", 300, 100, 50, 50, "Åle")
         self.screen_35_button = Button(self.skaerm, "box_til_ord.png", 1000, 500, 50, 50, "Ballade")
-        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 200, 400, 50, 50, "Marmelade")
+        self.screen_36_button = Button(self.skaerm, "box_til_ord.png", 300, 400, 50, 50, "Marmelade")
         self.screen_37_button = Button(self.skaerm, "box_til_ord.png", 1000, 100, 50, 50, "Hest")
-        self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 200, 200, 50, 50, "Bedst")
+        self.screen_38_button = Button(self.skaerm, "box_til_ord.png", 300, 200, 50, 50, "Bedst")
         self.screen_39_button = Button(self.skaerm, "box_til_ord.png", 1150, 300, 50, 50, "Østers")
         self.screen_40_button = Button(self.skaerm, "box_til_ord.png", 1150, 100, 50, 50, "Bavian")
         self.screen_41_button = Button(self.skaerm, "box_til_ord.png", 1150, 500, 50, 50, "Mand")
@@ -258,7 +258,6 @@ class SkærmTæller:
                             self.key2_clicked = False
 
                         elif self.nuvaerende_skaerm == 4:
-                            self.skaerm.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
                             self.key3_clicked = False
 
                             for button in self.buttons_clicked:
@@ -457,7 +456,6 @@ class SkærmTæller:
             self.start_button.draw()
         elif self.nuvaerende_skaerm >= 1 and self.nuvaerende_skaerm < 4:
             if self.nuvaerende_skaerm == 1:
-                self.skaerm.fill((255, 255, 255))
                 background_img_3 = pygame.image.load("Grafisk baggrund/Level_select.png")
                 background_img_3 = pygame.transform.scale(background_img_3, (self.skaerm_bredde, self.skaerm_hoejde))
                 self.skaerm.blit(background_img_3, (0, 0))
@@ -507,10 +505,6 @@ class SkærmTæller:
                 self.right_button.active = False
 
         elif self.nuvaerende_skaerm == 4:
-            self.skaerm.fill((0, 0, 255))
-            self.left_button.active = True
-            self.left_button.color = (0, 0, 0)
-            self.left_button.draw()
             self.screen_4_button.draw()
             self.screen_5_button.draw()
             self.screen_6_button.draw()
@@ -569,9 +563,6 @@ class SkærmTæller:
                         if all(self.buttons_clicked.values()):
                             print("All buttons on screen 4 have been clicked")
                             self.right_button_active = True
-
-            skaermtal_tekst = self.font.render(f"Skærm {self.nuvaerende_skaerm}", True, (0, 0, 0))
-            self.skaerm.blit(skaermtal_tekst, (self.skaerm_bredde // 2 - skaermtal_tekst.get_width() // 2, 20))
 
             if self.right_button_active:
                 self.right_button.active = True
@@ -667,7 +658,7 @@ class SkærmTæller:
 
         elif self.nuvaerende_skaerm == 9:
             self.skaerm.fill((0, 255, 79))
-            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen.png")
+            background_img_4 = pygame.image.load("Grafisk baggrund/Kasse_damen_ny.png")
             background_img_4 = pygame.transform.scale(background_img_4, (self.skaerm_bredde, self.skaerm_hoejde))
             self.skaerm.blit(background_img_4, (0, 0))
             self.screen_29_button.draw()
