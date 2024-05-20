@@ -32,10 +32,11 @@ class Button:
         self.active = False
 
 class Key:
-    def __init__(self, surface, image_path, x, y):
+    def __init__(self, surface, image_path, x, y, width=50, height=50):
         self.surface = surface
+        self.image_path = image_path
         self.image = pygame.image.load(image_path)
-        self.image = pygame.transform.scale(self.image, (50, 50))
+        self.image = pygame.transform.scale(self.image, (width, height))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -50,6 +51,11 @@ class Key:
             self.clicked = True
             return True
         return False
+
+    def scale_image(self, width, height):
+        self.image = pygame.image.load(self.image_path)  # Reload original image
+        self.image = pygame.transform.scale(self.image, (width, height))
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
 
 class Textbox:
     def __init__(self, x, y):
@@ -127,9 +133,9 @@ class SkærmTæller:
         self.right_button = Button(self.skaerm, "Hjre_pil.png", 1200, self.skaerm_hoejde/2-100, 50, 200)
 
 
-        self.key1 = Key(self.skaerm, "KEy_2.png", 100, 100)
-        self.key2 = Key(self.skaerm, "KEy_1.png", 600, 100)
-        self.key3 = Key(self.skaerm, "papir.png", 300, 100)
+        self.key1 = Key(self.skaerm, "KEy_1.png", self.skaerm_bredde / 2, self.skaerm_hoejde / 2, 30, 30)
+        self.key2 = Key(self.skaerm, "KEy_2.png", 450, 660, 30, 30)
+        self.key3 = Key(self.skaerm, "papir.png", 580, 460)
 
         self.key1_clicked = False
         self.key2_clicked = False
