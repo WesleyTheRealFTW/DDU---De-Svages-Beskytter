@@ -95,7 +95,7 @@ class SkærmTæller:
         pygame.mixer.init()
         pygame.mixer.music.load("musik.mp3")
         pygame.mixer.music.play(-1)
-        self.sound = pygame.mixer.Sound("Ny stickman joe mp3/Hoe siger tak.mp3")
+        self.sound = pygame.mixer.Sound("Ny stickman joe mp3/Goe siger tak.mp3")
         self.sound_1 = pygame.mixer.Sound("Ny stickman joe mp3/Joe stol.mp3")
         self.sound_2 = pygame.mixer.Sound("Ny stickman joe mp3/Joes cement.mp3")
         self.sound_3 = pygame.mixer.Sound("Ny stickman joe mp3/Joes gren.mp3")
